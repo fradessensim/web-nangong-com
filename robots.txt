@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fradessensim.github.io/web-nangong-com/sitemap.xml

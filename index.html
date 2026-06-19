@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>南宫体育 · 知识库</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+      background: #f4f6f9;
+      color: #1e2a3a;
+      line-height: 1.6;
+      padding: 24px 16px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* 头部 / hero */
+    .hero {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 40px 32px 36px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border: 1px solid #e4e9f0;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #0b1a2f;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero h1 small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #5a6e85;
+      background: #edf1f7;
+      padding: 4px 14px;
+      border-radius: 40px;
+      letter-spacing: 0;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: #2e405b;
+      max-width: 680px;
+      margin-top: 6px;
+    }
+    .hero .tagline {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hero .tagline span {
+      background: #eef3fa;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1f3a5e;
+      border: 1px solid #d9e1ec;
+    }
+
+    /* 卡片通用设计 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    @media (min-width: 640px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (min-width: 960px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px 22px;
+      border: 1px solid #e1e7ef;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(0,20,40,0.06);
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0f263e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .card li {
+      padding: 6px 0 6px 18px;
+      position: relative;
+      color: #2b3f58;
+      font-size: 0.95rem;
+      border-bottom: 1px solid #f0f3f8;
+    }
+    .card li:last-child {
+      border-bottom: none;
+    }
+    .card li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: #6584a5;
+      font-weight: 600;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #31465f;
+    }
+    .badge {
+      display: inline-block;
+      background: #e4ebf5;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      padding: 2px 10px;
+      border-radius: 40px;
+      color: #1d3857;
+      margin-left: 8px;
+    }
+
+    /* 宽卡片（横跨两列） */
+    .card-wide {
+      grid-column: 1 / -1;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px 28px;
+      border: 1px solid #e1e7ef;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 20px 32px;
+    }
+    .card-wide .col {
+      flex: 1 1 200px;
+    }
+    .card-wide h4 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #0f263e;
+      margin-bottom: 6px;
+    }
+    .card-wide p, .card-wide li {
+      font-size: 0.92rem;
+      color: #2f4460;
+    }
+    .card-wide ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .card-wide li {
+      padding: 4px 0;
+    }
+
+    /* 提示区 + 相关信息 */
+    .info-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    @media (min-width: 700px) {
+      .info-row {
+        grid-template-columns: 2fr 1.2fr;
+      }
+    }
+
+    .info-box {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px 26px;
+      border: 1px solid #e1e7ef;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .info-box h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0f263e;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eaeef5;
+    }
+    .info-box p {
+      font-size: 0.95rem;
+      color: #2b405c;
+      margin-bottom: 12px;
+    }
+    .info-box .faq-item {
+      margin-top: 14px;
+    }
+    .faq-item q {
+      display: block;
+      font-style: normal;
+      font-weight: 500;
+      color: #1b3451;
+      margin-bottom: 4px;
+    }
+    .faq-item p {
+      margin-top: 2px;
+      font-size: 0.9rem;
+      color: #3d5673;
+    }
+
+    /* 链接样式 */
+    a {
+      color: #1a4d7a;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    a:hover {
+      color: #0c2f4f;
+      text-decoration: underline;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b7f99;
+      padding: 28px 0 8px;
+      border-top: 1px solid #d8e0ea;
+      margin-top: 12px;
+      letter-spacing: 0.2px;
+    }
+    .footer span {
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- hero 区：目录感标题 + 关键词展开 -->
+  <div class="hero">
+    <h1>
+      📖 南宫体育 · 知识库
+      <small>主题索引</small>
+    </h1>
+    <p>围绕「南宫体育」及相关主题整理的内容指引，涵盖运动项目、训练思路、场地常识与安全提示。以下分类卡片可作为快速检索入口，每一板块均指向可供延伸阅读的方向。</p>
+    <div class="tagline">
+      <span>篮球 · 足球 · 羽毛球</span>
+      <span>体能训练</span>
+      <span>运动防护</span>
+      <span>赛事规则</span>
+    </div>
+  </div>
+
+  <!-- 卡片网格：目录感布局 + 三个分类 -->
+  <div class="card-grid">
+    <div class="card">
+      <h3>🏀 球类项目</h3>
+      <ul>
+        <li>篮球基本规则与场地尺寸</li>
+        <li>足球阵型演变与战术简述</li>
+        <li>羽毛球发球与计分要点</li>
+        <li>乒乓球旋转球入门</li>
+        <li>网球硬地 vs 红土差异</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🏋️ 训练与体能</h3>
+      <ul>
+        <li>核心力量训练基础动作</li>
+        <li>间歇跑与耐力适应</li>
+        <li>柔韧性拉伸时间建议</li>
+        <li>负重深蹲注意事项</li>
+        <li>运动后恢复策略</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🧭 场地与指南</h3>
+      <ul>
+        <li>室内场馆地面类型</li>
+        <li>户外运动照明与地面标识</li>
+        <li>常用训练器材说明</li>
+        <li>运动着装与装备维护</li>
+        <li>集体项目分组原则</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 宽卡片：场景与切入角度（丰富内容） -->
+  <div class="card-wide">
+    <div class="col">
+      <h4>📌 常见运动场景</h4>
+      <ul>
+        <li>业余俱乐部对抗赛</li>
+        <li>校园体育课分组练习</li>
+        <li>周末户外体能拉练</li>
+        <li>社区篮球循环赛</li>
+        <li>个人技术专项打磨</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>📘 主题内容切入点</h4>
+      <ul>
+        <li>从规则差异理解运动逻辑</li>
+        <li>从动作细节预防运动损伤</li>
+        <li>从周期训练提升综合表现</li>
+        <li>从装备选择改善运动体验</li>
+        <li>从团队配合建立战术意识</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h4>🔍 延伸关注点</h4>
+      <ul>
+        <li>运动营养基础</li>
+        <li>青少年训练负荷</li>
+        <li>赛事编排与赛程管理</li>
+        <li>运动心理学入门</li>
+        <li>运动数据分析简析</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 提示区 + 相关信息（双列） -->
+  <div class="info-row">
+    <div class="info-box">
+      <h3>⚠️ 安全与提示</h3>
+      <p>任何锻炼或比赛前都建议进行 5–10 分钟动态热身，尤其是下肢关节与肩关节。若感到持续性疼痛或不适，应暂停运动并视情况咨询专业人士。避免空腹进行高强度对抗，保持适度补水。</p>
+      <p>使用运动器材前请确认其状态是否完好，集体项目中注意与队友保持合理间距，防止碰撞或踩踏。场地湿滑时需格外留意脚步移动。</p>
+      <div class="faq-item">
+        <q>运动后第二天肌肉酸痛是否正常？</q>
+        <p>延迟性肌肉酸痛在运动后 24–72 小时出现属于正常现象，通常可通过轻度活动、拉伸和充分休息缓解。但若疼痛不对称或伴随肿胀，需留意是否拉伤。</p>
+      </div>
+    </div>
+    <div class="info-box">
+      <h3>📎 相关信息</h3>
+      <p style="margin-bottom:6px;"><strong>南宫体育</strong> 作为运动内容汇聚站点，提供了多类项目的基础资料与训练思路参考。页面中的分类线索可帮助你更快速定位感兴趣的主题。</p>
+      <p style="margin-bottom:12px;">如果你希望进一步浏览 <a href="https://web-nangong.com">南宫体育</a> 上的具体文章或分类内容，可以直接通过上方卡片方向进行延伸查阅。站内保持内容更新与实用导向。</p>
+      <div style="background:#f1f5fc; border-radius: 30px; padding: 10px 16px; font-size:0.9rem; color:#1a3a5e; margin-top:8px;">
+        ⚡ 建议从球类项目或训练基础开始阅读，逐步扩展至战术与恢复话题。
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="footer">
+    <span>内容整理 · 南宫体育知识库</span>
+    <span>|</span>
+    <span>基于公开资料与运动常识归纳</span>
+    <span>|</span>
+    <span><a href="https://web-nangong.com">南宫体育</a></span>
+  </div>
+
+</div>
+</body>
+</html>
